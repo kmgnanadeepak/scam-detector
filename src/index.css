@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 195 30% 95%;
+    --foreground: 220 25% 18%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 18%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 18%;
+
+    --primary: 187 70% 48%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 270 50% 60%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 200 20% 90%;
+    --muted-foreground: 220 15% 46%;
+
+    --accent: 187 65% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 200 20% 82%;
+    --input: 200 15% 88%;
+    --ring: 187 70% 48%;
+
+    --radius: 1.5rem;
+
+    /* Glassmorphic tokens - light luxury */
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-bg-hover: rgba(255, 255, 255, 0.35);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --glass-border-hover: rgba(255, 255, 255, 0.6);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+    --glass-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+
+    --aqua: 187 70% 48%;
+    --aqua-glow: 0 0 20px hsl(187 70% 48% / 0.3), 0 0 60px hsl(187 70% 48% / 0.1);
+    --aqua-glow-strong: 0 0 30px hsl(187 70% 48% / 0.4), 0 0 80px hsl(187 70% 48% / 0.2);
+    --gold-glow: 0 0 20px hsl(40 60% 70% / 0.3), 0 0 40px hsl(40 60% 70% / 0.1);
+
+    --neon-cyan: 187 70% 48%;
+    --neon-purple: 270 50% 60%;
+    --neon-pink: 320 60% 55%;
+
+    --gradient-bg: linear-gradient(160deg, hsl(0 0% 97%) 0%, hsl(185 40% 92%) 40%, hsl(200 50% 88%) 100%);
+    
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 25% 18%;
+    --sidebar-primary: 187 70% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 270 50% 60%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 200 20% 82%;
+    --sidebar-ring: 187 70% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    background: var(--gradient-bg);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  /* Floating gradient blobs */
+  .bg-blobs::before,
+  .bg-blobs::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .bg-blobs::before {
+    width: 500px;
+    height: 500px;
+    top: -10%;
+    left: -5%;
+    background: radial-gradient(circle, hsl(187 70% 70% / 0.25) 0%, transparent 70%);
+    animation: float-blob-1 20s ease-in-out infinite;
+  }
+
+  .bg-blobs::after {
+    width: 400px;
+    height: 400px;
+    bottom: 5%;
+    right: -5%;
+    background: radial-gradient(circle, hsl(270 50% 75% / 0.15) 0%, transparent 70%);
+    animation: float-blob-2 25s ease-in-out infinite;
+  }
+
+  @keyframes float-blob-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(60px, 40px) scale(1.1); }
+    66% { transform: translate(-30px, 60px) scale(0.95); }
+  }
+
+  @keyframes float-blob-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(-50px, -30px) scale(1.05); }
+    66% { transform: translate(40px, -50px) scale(0.9); }
+  }
+
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    transition: all 0.3s ease;
+  }
+
+  .glass:hover {
+    background: var(--glass-bg-hover);
+    border-color: var(--glass-border-hover);
+    box-shadow: var(--glass-shadow-hover);
+  }
+
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+  }
+
+  .glass-input {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .glass-input:focus {
+    background: rgba(255, 255, 255, 0.35);
+    border-color: hsl(var(--aqua) / 0.5);
+    box-shadow: var(--aqua-glow);
+  }
+
+  .glow-aqua {
+    box-shadow: var(--aqua-glow);
+  }
+
+  .glow-aqua-strong {
+    box-shadow: var(--aqua-glow-strong);
+  }
+
+  .glow-gold {
+    box-shadow: var(--gold-glow);
+  }
+
+  .glow-cyan {
+    box-shadow: var(--aqua-glow);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 20px hsl(270 50% 60% / 0.3);
+  }
+
+  .neon-text-cyan {
+    color: hsl(var(--aqua));
+    text-shadow: 0 0 10px hsl(var(--aqua) / 0.3);
+  }
+
+  .neon-text-purple {
+    color: hsl(var(--neon-purple));
+    text-shadow: 0 0 10px hsl(var(--neon-purple) / 0.3);
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.03) 25%,
+      rgba(0, 0, 0, 0.06) 50%,
+      rgba(0, 0, 0, 0.03) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: var(--aqua-glow); }
+    50% { box-shadow: var(--aqua-glow-strong); }
+  }
+
+  @keyframes shine {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .animate-shine {
+    background-size: 200% auto;
+    animation: shine 3s linear infinite;
+  }
+
+  /* Page transition */
+  .page-enter {
+    animation: fadeInUp 0.5s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
